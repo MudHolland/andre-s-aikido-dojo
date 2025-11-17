@@ -1,12 +1,12 @@
+import logo from "@/assets/logo.png";
+
 const Footer = () => {
   return (
     <footer className="bg-secondary/50 border-t border-border py-12 px-4">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4 text-foreground">
-              Andre's Aikido School
-            </h3>
+            <img src={logo} alt="Andre's Aikido School" className="h-16 w-auto mb-4" />
             <p className="text-muted-foreground">
               Vechtsportkunst in een respectvolle en ontspannen sfeer
             </p>
@@ -16,8 +16,8 @@ const Footer = () => {
             <h4 className="font-semibold mb-4 text-foreground">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#diensten" className="text-muted-foreground hover:text-primary transition-smooth">
-                  Disciplines
+                <a href="#aanbod" className="text-muted-foreground hover:text-primary transition-smooth">
+                  Aanbod
                 </a>
               </li>
               <li>
