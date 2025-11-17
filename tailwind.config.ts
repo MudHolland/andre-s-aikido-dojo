@@ -57,6 +57,13 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        dojo: {
+          sand: "hsl(var(--dojo-sand))",
+          wood: "hsl(var(--dojo-wood))",
+          red: "hsl(var(--dojo-red))",
+          "red-dark": "hsl(var(--dojo-red-dark))",
+          gold: "hsl(var(--dojo-gold))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
