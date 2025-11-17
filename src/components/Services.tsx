@@ -13,6 +13,11 @@ interface Sport {
 
 const sports: Sport[] = [
   {
+    name: "Saamhorigheid",
+    description: "Onze school is een plek waar je je veilig en zeker kunt voelen. Leren gaat nu eenmaal met vallen en opstaan, en hier mag dat.",
+    image: aikidoImage,
+  },
+  {
     name: "Aikido",
     description: "Liever iets praktisch voor het dagelijks leven? Dan is aikido een uitstekende keuze om jezelf op straat te leren verdedigen.",
     image: aikidoImage,
@@ -41,11 +46,11 @@ const sports: Sport[] = [
 
 const Services = () => {
   return (
-    <section id="diensten" className="py-20 px-4">
+    <section id="aanbod" className="py-20 px-4">
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-            Onze Disciplines
+            Ons Aanbod
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Ontdek de verschillende martial arts die wij aanbieden

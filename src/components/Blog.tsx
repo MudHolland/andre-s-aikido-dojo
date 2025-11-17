@@ -1,76 +1,110 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useState } from "react";
+import aikidoImage from "@/assets/aikido-practice.jpg";
+import judoImage from "@/assets/judo-practice.jpg";
+import jodoImage from "@/assets/jodo-practice.jpg";
 
 interface BlogPost {
-  id: number;
   title: string;
   excerpt: string;
+  content: string;
   date: string;
-  image?: string;
+  image: string;
 }
 
 const blogPosts: BlogPost[] = [
   {
-    id: 1,
-    title: "Welkom bij Andre's Aikido School",
-    excerpt: "Ontdek wat onze dojo uniek maakt en waarom vechtsport meer is dan alleen techniek.",
-    date: "2024-01-15",
+    title: "Nieuwe judolessen voor beginners",
+    excerpt: "We zijn verheugd om aan te kondigen dat we nieuwe judolessen voor beginners starten...",
+    content: "We zijn verheugd om aan te kondigen dat we nieuwe judolessen voor beginners starten. Deze lessen zijn speciaal ontworpen voor mensen die voor het eerst kennismaken met judo. In een veilige en ondersteunende omgeving leren deelnemers de basisprincipes van deze respectvolle vechtsport.",
+    date: "15 maart 2024",
+    image: judoImage,
   },
   {
-    id: 2,
-    title: "De Filosofie van Aikido",
-    excerpt: "Leer over de principes van harmonie en vloeiende bewegingen in de kunst van aikido.",
-    date: "2024-01-10",
+    title: "Aikido seminar met gastdocent",
+    excerpt: "Volgende maand verwelkomen we een speciale gastdocent voor een intensief aikido seminar...",
+    content: "Volgende maand verwelkomen we een speciale gastdocent voor een intensief aikido seminar. Deze ervaren meester zal verschillende technieken en filosofieën delen. Het seminar is geschikt voor alle niveaus en biedt een unieke kans om van een expert te leren.",
+    date: "10 maart 2024",
+    image: aikidoImage,
   },
   {
-    id: 3,
-    title: "Tuimeljudo voor Kinderen",
-    excerpt: "Een speelse introductie in de wereld van martial arts voor onze jongste leden.",
-    date: "2024-01-05",
+    title: "Succesvol Jo-do examen",
+    excerpt: "Gefeliciteerd aan alle studenten die hun Jo-do examen met succes hebben afgerond...",
+    content: "Gefeliciteerd aan alle studenten die hun Jo-do examen met succes hebben afgerond. Hun toewijding en harde werk hebben zich uitbetaald. We zijn trots op hun prestaties en kijken uit naar hun verdere ontwikkeling in Next Level Jo-do.",
+    date: "5 maart 2024",
+    image: jodoImage,
   },
 ];
 
 const Blog = () => {
-  return (
-    <section id="blog" className="py-20 px-4">
-      <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-            Nieuws & Verhalen
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Blijf op de hoogte van het laatste nieuws en inspirerende verhalen uit onze dojo
-          </p>
-        </div>
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {blogPosts.map((post) => (
-            <Card 
-              key={post.id} 
-              className="gradient-card border-border hover:border-primary transition-smooth shadow-soft hover:shadow-medium group cursor-pointer"
-            >
-              <CardHeader>
-                <CardTitle className="text-xl group-hover:text-primary transition-smooth">
-                  {post.title}
-                </CardTitle>
-                <p className="text-sm text-muted-foreground">{post.date}</p>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  {post.excerpt}
-                </p>
-                <Button 
-                  variant="link" 
-                  className="text-primary p-0 h-auto hover:text-primary/80"
-                >
-                  Lees meer →
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+  return (
+    <>
+      <section id="blog" className="py-20 px-4">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+              Nieuws & Verhalen
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Blijf op de hoogte van het laatste nieuws en inspirerende verhalen uit onze dojo
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {blogPosts.map((post, index) => (
+              <Card 
+                key={post.title}
+                className="border-border hover:border-primary transition-smooth overflow-hidden"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-full object-cover transition-slow hover:scale-110"
+                  />
+                </div>
+                <CardHeader>
+                  <CardTitle className="text-foreground">{post.title}</CardTitle>
+                  <p className="text-sm text-muted-foreground">{post.date}</p>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4">{post.excerpt}</p>
+                  <Button 
+                    variant="outline" 
+                    className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                    onClick={() => setSelectedPost(post)}
+                  >
+                    Lees meer
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <Dialog open={!!selectedPost} onOpenChange={() => setSelectedPost(null)}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="text-2xl">{selectedPost?.title}</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <img
+              src={selectedPost?.image}
+              alt={selectedPost?.title}
+              className="w-full h-64 object-cover rounded-lg"
+            />
+            <p className="text-sm text-muted-foreground">{selectedPost?.date}</p>
+            <p className="text-foreground leading-relaxed">{selectedPost?.content}</p>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 
